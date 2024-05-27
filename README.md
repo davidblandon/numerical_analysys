@@ -1,4 +1,4 @@
-Hola, aqui unas indicaciones 
+Hola, aqui unas indicaciones:
 
 Asegurate de tener python instalado c:
 
