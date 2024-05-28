@@ -15,7 +15,7 @@ def graficar(x, y, cs):
     plt.show()
 
 def guardar_archivo(x, y, cs):
-    with open("resultado.txt", "w") as f:
+    with open("resultado_cubico.txt", "w") as f:
         f.write("Datos:\n")
         for i in range(len(x)):
             f.write(f"({x[i]:.2f}, {y[i]:.2f})\n")
