@@ -35,6 +35,26 @@ def plot_polynomial(x, y, polynomial):
     plt.legend()
     plt.show()
 
+def save_to_file(vandermonde_matrix, polynomial, x, y):
+    """
+    Guarda la información en un archivo txt.
+
+    Parámetros:
+    vandermonde_matrix (array): Matriz de Vandermonde
+    polynomial (array): Coeficientes del polinomio
+    x (array): Valores de x
+    y (array): Valores de y
+    """
+    with open('vandermonde_output.txt', 'w') as f:
+        f.write('Matriz de Vandermonde:\n')
+        f.write(str(vandermonde_matrix) + '\n\n')
+        f.write('Polinomio de la solución:\n')
+        f.write(str(polynomial) + '\n\n')
+        f.write('Valores de x:\n')
+        f.write(str(x) + '\n\n')
+        f.write('Valores de y:\n')
+        f.write(str(y) + '\n\n')
+
 # Ejemplo de uso
 x = np.array([-1, 0, 1, 2, 3])
 y = np.array([1, 2, 3, 4, 5])
@@ -47,3 +67,5 @@ print("Polinomio de la solución:")
 print(polynomial)
 
 plot_polynomial(x, y, polynomial)
+
+save_to_file(vandermonde_matrix, polynomial, x, y)
