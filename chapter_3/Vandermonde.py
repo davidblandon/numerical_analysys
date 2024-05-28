@@ -26,3 +26,17 @@ def Vandermonde(points):
   #points = {"x": np.array([1, 2, 3]), "y": np.array([3, 5, 7])}
   #resultados = Vandermonde(points)
   #print(resultados)
+
+# Ejemplo de uso
+points = {"x": np.array([1, 2, 3]), "y": np.array([3, 5, 7])}
+resultados = Vandermonde(points)
+print("Matriz A:")
+print(resultados["matrizA"])
+print("Matriz B:")
+print(resultados["matrizB"])
+print("Matriz C:")
+print(resultados["matrizC"])
+print("Polinomio resultante:")
+print(resultados["polinomio_resultante"])
+print("Coeficientes:")
+print(resultados["coeficientes"])
