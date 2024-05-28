@@ -2,7 +2,7 @@ import numpy as np
 import sympy as sp
 import pandas as pd
 
-def biseccion(f_expr, xi, xs, tol, niter):
+def method_biseccion(f_expr, xi, xs, tol, niter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión a una función evaluable
     fi = f(xi)
@@ -51,14 +51,15 @@ def biseccion(f_expr, xi, xs, tol, niter):
         return resultados, mensaje
 
 # Ejemplo de uso de la función
-x = sp.symbols('x')
-xi = -4
-xs = -0.1
-tol = 0.0001
-niter = 100
-funcion = x**2 - 5*x + 6*sp.sin(x)
+# Ejemplo de uso de la función
+# x = sp.symbols('x')
+# xi = -4
+# xs = -0.1
+# tol = 0.0001
+# niter = 100
+# funcion = x**2 - 5*x + 6*sp.sin(x)
 
-resultados, mensaje = biseccion(funcion, xi, xs, tol, niter)
+# resultados, mensaje = method_biseccion(funcion, xi, xs, tol, niter)
 
-print(mensaje)
-print(resultados)
+# print(mensaje)
+# print(resultados)

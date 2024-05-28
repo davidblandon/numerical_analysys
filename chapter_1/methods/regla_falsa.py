@@ -1,7 +1,7 @@
 import sympy as sp
 import pandas as pd
 
-def regla_falsa(f_expr, a, b, tol, max_iter):
+def method_regla_falsa(f_expr, a, b, tol, max_iter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')
     
@@ -41,13 +41,13 @@ def regla_falsa(f_expr, a, b, tol, max_iter):
     return resultados, f'Convergencia no alcanzada en {max_iter} iteraciones. Mejor aproximación: {c}'
 
 # Ejemplo de uso
-x = sp.symbols('x')
-f_expr = x**3 - x - 1
-a = 1
-b = 5
-tol = 1e-5
-max_iter = 100
+# x = sp.symbols('x')
+# f_expr = x**3 - x - 1
+# a = 1
+# b = 5
+# tol = 1e-5
+# max_iter = 100
 
-resultados, mensaje = regla_falsa(f_expr, a, b, tol, max_iter)
-print(mensaje)
-print(resultados)
+# resultados, mensaje = regla_falsa(f_expr, a, b, tol, max_iter)
+# print(mensaje)
+# print(resultados)

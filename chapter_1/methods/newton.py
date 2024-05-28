@@ -1,7 +1,7 @@
 import sympy as sp
 import pandas as pd
 
-def newton(f_expr, x0, tol, niter):
+def method_newton(f_expr, x0, tol, niter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión simbólica de f a una función evaluable
     df = sp.lambdify(x, sp.diff(f_expr, x), 'numpy')  # Convertir la derivada de f
@@ -39,12 +39,12 @@ def newton(f_expr, x0, tol, niter):
     return resultados, mensaje
 
 # Ejemplo de uso de la función
-x = sp.symbols('x')
-f_expr = (sp.exp(x)/x) + 3  # Esta es la función f
-x0 = -1
-tol = 1e-8
-niter = 100
+# x = sp.symbols('x')
+# f_expr = (sp.exp(x)/x) + 3  # Esta es la función f
+# x0 = -1
+# tol = 1e-8
+# niter = 100
 
-resultados, mensaje = newton(f_expr, x0, tol, niter)
-print(mensaje)
-print(resultados)
+# resultados, mensaje = newton(f_expr, x0, tol, niter)
+# print(mensaje)
+# print(resultados)

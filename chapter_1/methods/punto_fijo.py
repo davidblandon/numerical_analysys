@@ -1,7 +1,7 @@
 import sympy as sp
 import pandas as pd
 
-def punto_fijo(f_expr, g_expr, x0, tol, niter):
+def method_punto_fijo(f_expr, g_expr, x0, tol, niter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión simbólica de f a una función evaluable
     g = sp.lambdify(x, g_expr, 'numpy')  # Convertir la expresión simbólica de g a una función evaluable
@@ -33,13 +33,13 @@ def punto_fijo(f_expr, g_expr, x0, tol, niter):
     return resultados, mensaje
 
 # Ejemplo de uso de la función
-x = sp.symbols('x')
-f_expr = sp.exp(x)/x + 3  # Esta es la función f
-g_expr = -sp.exp(x)/3  # Esta es la función g que transforma x
-x0 = -1
-tol = 0.001
-niter = 1000
+# x = sp.symbols('x')
+# f_expr = sp.exp(x)/x + 3  # Esta es la función f
+# g_expr = -sp.exp(x)/3  # Esta es la función g que transforma x
+# x0 = -1
+# tol = 0.001
+# niter = 1000
 
-resultados, mensaje = punto_fijo(f_expr, g_expr, x0, tol, niter)
-print(mensaje)
-print(resultados)
+# resultados, mensaje = punto_fijo(f_expr, g_expr, x0, tol, niter)
+# print(mensaje)
+# print(resultados)

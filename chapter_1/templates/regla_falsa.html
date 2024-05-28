@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="method">
+    <h1>Método de Regla Falsa</h1>
+    <form id="methodForm" method="post" action="{% url 'regla_falsa' %}">
+        {% csrf_token %}
+        <label for="funcion">Función:</label>
+        <input type="text" id="funcion" name="funcion" required><br>
+
+        <label for="a">a:</label>
+        <input type="text" id="a" name="a" required><br>
+
+        <label for="b"> b:</label>
+        <input type="text" id="b" name="b" required><br>
+
+        <label for="tol">Tolerancia:</label>
+        <input type="text" id="tol" name="tol" required><br>
+
+        <label for="max_iter">Maximo de Iteraciones:</label>
+        <input type="text" id="max_iter" name="max_iter" required><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if answer %}
+    <h2>Resultados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Encabezado 1</th>
+                <th>Encabezado 2</th>
+                <th>Encabezado 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.field1 }}</td>
+                <td>{{ result.field2 }}</td>
+                <td>{{ result.field3 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button onclick="exportToTxt()">Exportar como TXT</button>
+    <button onclick="showResults()">Mostrar Resultados</button>
+    {% endif %}
+</div>
+
+<script>
+function exportToTxt() {
+    // Lógica para exportar los resultados como TXT
+    alert('Función de exportación como TXT no implementada.');
+}
+
+function showResults() {
+    // Lógica para mostrar los resultados en pantalla
+    alert('Resultados mostrados en pantalla.');
+}
+</script>
+{% endblock content %}

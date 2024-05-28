@@ -21,10 +21,18 @@ header nav ul {
 header nav ul li a {
     color: #fff;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 main {
     padding: 20px;
+}
+
+.dropdown:hover .navbar-logo {
+    transform: scale(1.2); /* Aumenta el tamaño de la imagen en un 20% */
+    transition: transform 0.3s ease-in-out; /* Agrega una transición suave */
 }
 
 footer {
@@ -49,9 +57,10 @@ footer {
 .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #333;
+    background-color: #2d3635;
     width: 100%;
     box-sizing: border-box;
+    flex-direction: column;
 }
 
 .dropdown-menu a {
@@ -64,6 +73,12 @@ footer {
 .dropdown-menu a:hover {
     background-color: #555;
 }
+
+.dropdown-menu {
+    position: static;
+    border: 1px solid #fff; /* Agrega un borde blanco */
+}
+
 
 /* Muestra el menú desplegable cuando se pasa el mouse sobre .dropdown */
 .dropdown:hover .dropdown-menu {
@@ -101,3 +116,54 @@ footer {
     width: 40px; 
     height: auto;
 }
+
+/* Added media query for responsive design */
+@media (max-width: 768px) {
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+.method {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.method h1 {
+    margin-bottom: 20px;
+}
+
+.method form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.method form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.method table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.method table th, .method table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.method table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+

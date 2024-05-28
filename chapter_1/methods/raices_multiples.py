@@ -1,7 +1,7 @@
 import sympy as sp
 import pandas as pd
 
-def raices_multiples(f_expr, x0, m, tol, niter):
+def method_raices_multiples(f_expr, x0, m, tol, niter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')
     df = sp.lambdify(x, sp.diff(f_expr, x), 'numpy')
@@ -30,15 +30,14 @@ def raices_multiples(f_expr, x0, m, tol, niter):
 
     mensaje = f'{xn} es una aproximación de una raíz de f(x) con una tolerancia de {tol}' if error < tol else "Fracasó en alcanzar la convergencia"
     return resultados, mensaje
+    # x = sp.symbols('x')
+    # f_expr = (x - 2)**3 + 1
+    # x0 = 3.0  # Punto inicial
+    # m = 3
+    # tol = 1e-8
+    # niter = 20
 
-x = sp.symbols('x')
-f_expr = (x - 2)**3 + 1
-x0 = 3.0  # Punto inicial
-m = 3
-tol = 1e-8
-niter = 20
-
-resultados, mensaje = raices_multiples(f_expr, x0, m, tol, niter)
-print(mensaje)
-print(resultados)
+    # resultados, mensaje = raices_multiples(f_expr, x0, m, tol, niter)
+    # print(mensaje)
+    # print(resultados)
 

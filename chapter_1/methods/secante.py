@@ -2,7 +2,7 @@ import sympy as sp
 import pandas as pd
 import numpy as np
 
-def secante(f_expr, x0, x1, tol, niter):
+def method_secante(f_expr, x0, x1, tol, niter):
     x = sp.symbols('x')
     f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión simbólica a una función evaluable
 
@@ -51,6 +51,6 @@ x1 = 2.0  # Punto inicial cercano a la raíz real
 tol = 1e-8
 niter = 100
 
-resultados, mensaje = secante(f_expr, x0, x1, tol, niter)
-print(mensaje)
-print(resultados)
+# resultados, mensaje = secante(f_expr, x0, x1, tol, niter)
+# print(mensaje)
+# print(resultados)
