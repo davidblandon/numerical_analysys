@@ -5,6 +5,10 @@ from .methods.punto_fijo import method_punto_fijo
 from .methods.raices_multiples import method_raices_multiples
 from .methods.regla_falsa import method_regla_falsa
 from .methods.secante import  method_secante
+from numerical_analysys.export.toTxt import create_txt_download
+import numpy as np
+import sympy as sp
+import pandas as pd
 
 # Create your views here.
 
@@ -14,20 +18,35 @@ def home(request):
 def biseccion(request):
     view_data = {}
     if request.method == 'POST':
+        if 'download' in request.POST:
+            
+            answer = request.POST.get('answer')
+            messaje = request.POST.get('messaje')
 
-        funcion = request.POST.get('funcion')
-        xi = request.POST.get('xi')
-        xs = request.POST.get('xs')
-        tol = request.POST.get('tol')
-        iter = request.POST.get('iter')
-        answer = method_biseccion(funcion, xi, xs, tol, iter)
+            return create_txt_download(answer, messaje)
+        else:
 
-        view_data['funcion'] = funcion
-        view_data['xi'] = xi
-        view_data['xs'] = xs    
-        view_data['tol'] = tol
-        view_data['iter'] = iter
-        view_data['answer'] = answer
+            funcion = request.POST.get('funcion')
+            xi = float(request.POST.get('xi'))
+            xs = float(request.POST.get('xs'))
+            tol = float(request.POST.get('tol'))
+            iter = int(request.POST.get('iter'))
+            answer,messaje = method_biseccion(funcion, xi, xs, tol, iter)
+
+            view_data['funcion'] = funcion
+            view_data['xi'] = xi
+            view_data['xs'] = xs    
+            view_data['tol'] = tol
+            view_data['iter'] = iter
+            if answer.empty:
+                view_data['answer'] = 'No se encontró la solución'
+
+            else:
+
+                view_data['answer'] = answer.to_html()
+                view_data['answer_raw'] = answer
+            view_data['messaje'] = messaje
+
 
         return render(request, 'biseccion.html', {'view_data': view_data})
     else:
@@ -37,6 +56,12 @@ def biseccion(request):
 def newton(request):
     view_data = {}
     if request.method == 'POST':
+        if 'download' in request.POST:
+            
+            answer = request.POST.get('answer')
+            messaje = request.POST.get('messaje')
+
+            return create_txt_download(answer, messaje)
 
         funcion = request.POST.get('funcion')
         x0 = request.POST.get('x0')
@@ -48,7 +73,14 @@ def newton(request):
         view_data['x0'] = x0    
         view_data['tol'] = tol
         view_data['iter'] = iter
-        view_data['answer'] = answer
+        if answer.empty:
+            view_data['answer'] = 'No se encontró la solución'
+
+        else:
+
+            view_data['answer'] = answer.to_html()
+            view_data['answer_raw'] = answer
+        view_data['messaje'] = messaje
 
         return render(request, 'newton.html', {'view_data': view_data})
     else:

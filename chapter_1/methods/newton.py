@@ -3,7 +3,7 @@ import pandas as pd
 
 def method_newton(f_expr, x0, tol, niter):
     x = sp.symbols('x')
-    f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión simbólica de f a una función evaluable
+    f = sp.lambdify(x, f_expr, 'sympy')  # Convertir la expresión simbólica de f a una función evaluable
     df = sp.lambdify(x, sp.diff(f_expr, x), 'numpy')  # Convertir la derivada de f
 
     resultados = pd.DataFrame(columns=['Iteración', 'xn', 'f(xn)', 'df(xn)', 'Error'])

@@ -4,7 +4,7 @@ import pandas as pd
 
 def method_biseccion(f_expr, xi, xs, tol, niter):
     x = sp.symbols('x')
-    f = sp.lambdify(x, f_expr, 'numpy')  # Convertir la expresión a una función evaluable
+    f = sp.lambdify(x, f_expr, modules={'numpy': np, 'sympy': sp})  # Convertir la expresión a una función evaluable
     fi = f(xi)
     fs = f(xs)
 
