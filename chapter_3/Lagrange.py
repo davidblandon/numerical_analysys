@@ -1,43 +1,37 @@
+import numpy as np
+
 def Lagrange(points):
-    # Verificar si hay duplicados en x o y
-    if len(set(points['x'])) != len(points['x']) or len(set(points['y'])) != len(points['y']):
-        raise ValueError("No se permiten duplicados en x o y")
-
-    # Inicializar matrices
+    x = points['x']
+    y = points['y']
+    n = len(x)
     polinomios = []
-    grado = len(points['x'])
 
-    # Calcular cada polinomio de interpolación
-    for k in range(grado):
-        numerator = ""
-        denominator = ""
-        for j in range(grado):
-            if j != k:
-                if points['x'][j] < 0:
-                    numerator += f"(x+{-points['x'][j]})"
-                    if points['x'][k] == 0:
-                        denominator += f"({points['x'][j]})"
-                    else:
-                        denominator += f"({points['x'][k]}+{-points['x'][j]})"
-                elif points['x'][j] > 0:
-                    numerator += f"(x-{points['x'][j]})"
-                    if points['x'][k] == 0:
-                        denominator += f"({points['x'][j]})"
-                    else:
-                        denominator += f"({points['x'][k]}-{points['x'][j]})"
-                else:
-                    numerator += "(x)"
-                    if points['x'][k] != 0:
-                        denominator += f"({points['x'][k]})"
-        polinomios.append(f"({numerator})/({denominator})")
+    for i in range(n):
+        numerador = 1
+        denominador = 1
+        for j in range(n):
+            if i != j:
+                numerador *= (x - x[j])
+                denominador *= (x[i] - x[j])
+        polinomio_i = numerador / denominador
+        polinomios.append(polinomio_i)
 
-    # Combinar polinomios de interpolación
-    polinomio = " + ".join(f"({points['y'][i]}*{pol})" for i, pol in enumerate(polinomios))
+    polinomio_interpolacion = 0
+    for i in range(n):
+        polinomio_interpolacion += y[i] * polinomios[i]
 
-    return {'polinomio': polinomio, 'polinomios': polinomios}
+    resultado = {
+        'polinomio': str(polinomio_interpolacion),
+        'polinomios': [str(p) for p in polinomios]
+    }
 
-# points = {'x': [1, 2, 3], 'y': [2, 4, 5]}
-#result = Lagrange(points)
-#print(result)
+    return resultado
 
-#{'polinomio': '(2*(x-2)*(x-3))/(1-2)*(1-3) + (4*(x-1)*(x-3))/(2-1)*(2-3) + (5*(x-1)*(x-2))/(3-1)*(3-2)', 'polinomios': ['(x-2)*(x-3)/(1-2)*(1-3)', '(x-1)*(x-3)/(2-1)*(2-3)', '(x-1)*(x-2)/(3-1)*(3-2)']}
+# Ejemplo de uso
+points = {
+    'x': np.array([0, 1, 2]),
+    'y': np.array([1, 3, 2])
+}
+
+resultado = Lagrange(points)
+print(resultado)
