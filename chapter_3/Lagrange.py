@@ -35,3 +35,9 @@ def Lagrange(points):
     polinomio = " + ".join(f"({points['y'][i]}*{pol})" for i, pol in enumerate(polinomios))
 
     return {'polinomio': polinomio, 'polinomios': polinomios}
+
+# points = {'x': [1, 2, 3], 'y': [2, 4, 5]}
+#result = Lagrange(points)
+#print(result)
+
+#{'polinomio': '(2*(x-2)*(x-3))/(1-2)*(1-3) + (4*(x-1)*(x-3))/(2-1)*(2-3) + (5*(x-1)*(x-2))/(3-1)*(3-2)', 'polinomios': ['(x-2)*(x-3)/(1-2)*(1-3)', '(x-1)*(x-3)/(2-1)*(2-3)', '(x-1)*(x-2)/(3-1)*(3-2)']}
