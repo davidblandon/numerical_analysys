@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def SOR(A, b, x0, tol, niter, w):
+def method_SOR(A, b, x0, tol, niter, w):
     if w <= 0 or w >= 2:
         raise ValueError("El factor de relajación w debe estar entre 0 y 2.")
     
@@ -35,12 +35,4 @@ A = np.array([[4, -1, 0, 0],
               [0, -1, 4, -1],
               [0, 0, -1, 3]], dtype=float)
 
-b = np.array([15, 10, 10, 10], dtype=float)
-x0 = np.zeros(len(b))  # Condiciones iniciales
-tol = 1e-5  # Tolerancia
-niter = 100  # Número máximo de iteraciones
-w = 1.25  # Factor de relajación
 
-resultados, mensaje_final = SOR(A, b, x0, tol, niter, w)
-print(mensaje_final)
-print(resultados)

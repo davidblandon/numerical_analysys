@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-def gauss_seidel(A, b, x0, tol, niter):
+def method_gauss_seidel(A, b, x0, tol, niter):
     n = len(A)
     x = x0.copy()
     resultados = pd.DataFrame(columns=['Iteración', 'x', 'Error'])
@@ -25,14 +25,4 @@ def gauss_seidel(A, b, x0, tol, niter):
     return resultados, mensaje
 
 # Ejemplo de uso:
-A = np.array([[16, 3],
-              [7, -11]], dtype=float)
 
-b = np.array([11, 13], dtype=float)
-x0 = np.zeros(len(b))  # Condiciones iniciales
-tol = 1e-5  # Tolerancia
-niter = 100  # Número máximo de iteraciones
-
-resultados, mensaje_final = gauss_seidel(A, b, x0, tol, niter)
-print(mensaje_final)
-print(resultados)
