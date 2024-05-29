@@ -1,5 +1,6 @@
 import sympy as sp
 import pandas as pd
+from sympy import Derivative
 
 def method_newton(f_expr, x0, tol, niter):
     x = sp.symbols('x')

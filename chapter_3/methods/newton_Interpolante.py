@@ -11,27 +11,49 @@ def method_newton_interpolante(x, y):
         for j in range(i, n):
             a[j, i] = (a[j, i-1] - a[j-1, i-1]) / (x[j] - x[j-i])
     
-    polinomio = "P(x) = "
+    polinomio = np.zeros(n)
     for i in range(n):
-        if i > 0:
-            polinomio += " + "
-        polinomio += f"{a[i, i]:.2f}"
+        temp = a[i, i]
         for j in range(i):
-            polinomio += f"(x - {x[j]:.2f})"
-    
+            temp = np.polymul(temp, np.poly1d([1., -x[j]]))
+        polinomio = np.polyadd(polinomio, temp)
+
+    # Crear un rango de valores x para la gráfica
+    x_range = np.linspace(min(x), max(x), 100)
+
+    # Evaluar el polinomio de interpolación en el rango de x
+    y_range = np.polyval(polinomio, x_range)
+
+    # Graficar la función de interpolación y los puntos de entrada
+    plt.plot(x_range, y_range, label='Interpolación de Newton')
+    plt.scatter(x, y, color='red', label='Puntos de entrada')
+
+    # Ajustar los límites de los ejes para que la gráfica se vea desde más lejos
+    x_margin = 0.1 * (max(x) - min(x))
+    y_margin = 0.1 * (max(y) - min(y))
+    plt.xlim(min(x) - x_margin, max(x) + x_margin)
+    plt.ylim(min(y) - y_margin, max(y) + y_margin)
+
+    plt.legend()
+    plt.show()
+
+    # Construir representación en cadena de texto del polinomio de interpolación
+    polinomio_str = " + ".join([f"{coef:.2f}x^{i}" for i, coef in enumerate(polinomio[::-1])])
+
     resultado = pd.DataFrame({
         'x': x,
         'y': y,
-        'polinomio Newton': [polinomio] * n
+        'polinomio Newton': [polinomio_str] * n
     })
 
     # Verificar si la interpolación fue exitosa
-    if np.isfinite(a).all():
+    if np.isfinite(polinomio).all():
         mensaje = 'La interpolación de Newton se realizó correctamente para los puntos dados.'
     else:
         mensaje = 'La interpolación de Newton falló. Por favor, verifica los puntos de entrada.'
 
     return resultado, mensaje
+
 def graficar(x, y, polinomio):
     x_interp = np.linspace(min(x), max(x), 100)
     y_interp = np.interp(x_interp, x, y)

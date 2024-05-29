@@ -5,12 +5,30 @@ from scipy.interpolate import CubicSpline
 
 from scipy.interpolate import CubicSpline
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.interpolate import CubicSpline
+
 def method_spline_cubico(x, y):
     cs = CubicSpline(x, y, bc_type='natural')
 
     # Generar una lista de valores y de los polinomios evaluados en esos valores
     x_values = np.linspace(min(x), max(x), num=100)
     y_values = cs(x_values)
+
+    # Graficar la función de interpolación y los puntos de entrada
+    plt.plot(x_values, y_values, label='Interpolación de spline cúbico')
+    plt.scatter(x, y, color='red', label='Puntos de entrada')
+
+    # Ajustar los límites de los ejes para que la gráfica se vea desde más lejos
+    x_margin = 0.1 * (max(x) - min(x))
+    y_margin = 0.1 * (max(y) - min(y))
+    plt.xlim(min(x) - x_margin, max(x) + x_margin)
+    plt.ylim(min(y) - y_margin, max(y) + y_margin)
+
+    plt.legend()
+    plt.show()
 
     resultado = pd.DataFrame({
         'x': x_values,

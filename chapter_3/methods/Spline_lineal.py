@@ -3,12 +3,30 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.interpolate import InterpolatedUnivariateSpline
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.interpolate import InterpolatedUnivariateSpline
+
 def method_spline_lineal(x, y):
-    spl = InterpolatedUnivariateSpline(x, y,k=1)
+    spl = InterpolatedUnivariateSpline(x, y, k=1)
 
     # Generar una lista de valores y de los polinomios evaluados en esos valores
     x_values = np.linspace(min(x), max(x), num=100)
     y_values = spl(x_values)
+
+    # Graficar la función de interpolación y los puntos de entrada
+    plt.plot(x_values, y_values, label='Interpolación de spline lineal')
+    plt.scatter(x, y, color='red', label='Puntos de entrada')
+
+    # Ajustar los límites de los ejes para que la gráfica se vea desde más lejos
+    x_margin = 0.1 * (max(x) - min(x))
+    y_margin = 0.1 * (max(y) - min(y))
+    plt.xlim(min(x) - x_margin, max(x) + x_margin)
+    plt.ylim(min(y) - y_margin, max(y) + y_margin)
+
+    plt.legend()
+    plt.show()
 
     resultado = pd.DataFrame({
         'x': x_values,
@@ -22,7 +40,6 @@ def method_spline_lineal(x, y):
         mensaje = 'La interpolación de spline lineal falló. Por favor, verifica los puntos de entrada.'
 
     return resultado, mensaje
-
 def graficar(x, y, spl):
     x_new = np.linspace(min(x), max(x), 100)
     y_new = spl(x_new)

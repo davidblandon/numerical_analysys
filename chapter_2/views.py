@@ -3,6 +3,7 @@ from .methods.gauss_seidel import method_gauss_seidel
 from .methods.jacobi import method_jacobi
 from .methods.SOR import method_SOR
 from numerical_analysys.export.toTxt import create_txt_download
+    
 import numpy as np
 import ast
 

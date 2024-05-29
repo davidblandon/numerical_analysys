@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
 def method_vandermonde(x, y, degree):
     """
     Calcula la matriz de Vandermonde y el polinomio de la solución.
@@ -19,6 +23,25 @@ def method_vandermonde(x, y, degree):
     coefficients, _, _, _ = np.linalg.lstsq(vandermonde_matrix, y, rcond=None)
     polynomial = np.poly1d(coefficients[::-1])
 
+    # Crear un rango de valores x para la gráfica
+    x_range = np.linspace(min(x), max(x), 100)
+
+    # Evaluar el polinomio de interpolación en el rango de x
+    y_range = np.polyval(polynomial, x_range)
+
+    # Graficar la función de interpolación y los puntos de entrada
+    plt.plot(x_range, y_range, label='Interpolación de Vandermonde')
+    plt.scatter(x, y, color='red', label='Puntos de entrada')
+
+    # Ajustar los límites de los ejes para que la gráfica se vea desde más lejos
+    x_margin = 0.1 * (max(x) - min(x))
+    y_margin = 0.1 * (max(y) - min(y))
+    plt.xlim(min(x) - x_margin, max(x) + x_margin)
+    plt.ylim(min(y) - y_margin, max(y) + y_margin)
+
+    plt.legend()
+    plt.show()
+
     # Construir representación en cadena de texto del polinomio
     polynomial_str = str(polynomial)
 
@@ -35,7 +58,6 @@ def method_vandermonde(x, y, degree):
         mensaje = 'La interpolación de Vandermonde falló. Por favor, verifica los puntos de entrada.'
 
     return resultado, mensaje
-
 
 def plot_polynomial(x, y, polynomial):
     """

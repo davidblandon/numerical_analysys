@@ -31,6 +31,7 @@ def biseccion(request):
         tol = float(request.POST.get('tol'))
         iter = int(request.POST.get('iter'))
         answer,message = method_biseccion(funcion, xi, xs, tol, iter)
+        print(answer + message)
 
         view_data['funcion'] = funcion
         view_data['xi'] = xi

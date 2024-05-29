@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Metodos Númericos{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 </head>
 <body>
     <header>
         <nav>
             <ul>
             <li>
-            <img src="{% static 'images/logo.png' %}" alt="Logo" class="navbar-logo">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="navbar-logo">
+                </a>
             </li>
-                    <a href="{% url 'home' %}">Inicio</a>
+
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Capitulo 1 <span class="caret"></span></a>
@@ -50,6 +53,74 @@
                     <!-- Add more reductions here -->
                 </ul>
             </li>
+
+
+
+
+
+            <!-- HELP -->
+            <li>
+            <button id="myBtn">Abrir Ayuda</button>
+
+            <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>¿No sabes como ingresar funciones o matrices?</h2>
+                <table>
+                    <tr>
+                        <th>Caracter o Función</th>
+                        <th>Manera de ingresarlo</th>
+                    </tr>
+                    <tr>
+                        <td>Seno, Coseno, Tangente</td>
+                        <td>sin(x), cos(x), tan(x)</td>
+                    </tr>
+                    <tr>
+                        <td>Cosecante, Secante, Cotangente</td>
+                        <td>csc(x) o 1/sin(x), sec(x) o 1/cos(x), cot(x) o 1/tan(x)</td>
+                    </tr>
+                    <tr>
+                        <td>Funciones inversas de trigonometría</td>
+                        <td>asin(x), acos(x), atan(x)</td>
+                    </tr>
+                    <tr>
+                        <td>Funciones hiperbólicas</td>
+                        <td>sinh(x), cosh(x), tanh(x)</td>
+                    </tr>
+                    <tr>
+                        <td>Funciones inversas de trigonometría hiperbólica</td>
+                        <td>asinh(x), acosh(x), atanh(x)</td>
+                    </tr>
+                    <tr>
+                        <td>e, π, e^x, e^n</td>
+                        <td>exp(1), pi, exp(x), exp(n)</td>
+                    </tr>
+                    <tr>
+                        <td>Logaritmo natural, Logaritmo base 10, Logaritmo base n</td>
+                        <td>ln(x), log(x), log(x,n)</td>
+                    </tr>
+                    <tr>
+                        <td>Raiz cuadrada, potenciación por n, Raiz por n</td>
+                        <td>sqrt(x), x**n o pow(x,n), x**(1/n) </td>
+                    </tr>
+                    <tr>
+                        <td>Valor absoluto</td>
+                        <td>abs(x)</td>
+                    </tr>
+                    <tr>
+                        <td>Matrices</td>
+                        <td>[[x1, y1], [x2, y2]] 2x2 ; [[x1,y1,z1],[x2, y2, z2], [x3, y3, z3]] 3x3...</td>
+                    </tr>
+                    <tr>
+                        <td>Vectores fila y vectores columna</td>
+                        <td> [x, y] ; [[x], [y]] </td>
+                    </tr>
+
+                    <!-- Agrega más filas según sea necesario -->
+                </table>
+            </div>
+            </div>
+            </li>
             </ul>
         </nav>
     </header>
@@ -61,5 +132,6 @@
     <footer>
         <p>Katherin Allin | David Blandon | Martín Espitia | 2024</p>
     </footer>
+    <script src="{% static 'js/modal.js' %}"></script>
 </body>
 </html>
