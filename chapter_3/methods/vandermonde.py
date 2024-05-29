@@ -1,42 +1,89 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
-def method_vandermonde(points):
-    # Crear matrices A, B y C
-    matrizA = np.vander(points['x'], increasing=True)
-    matrizB = np.matrix(points['y']).T
-    matrizC = np.array([f"a{i}" for i in range(len(points['x']))])
+def method_vandermonde(x, y, degree):
+    """
+    Calcula la matriz de Vandermonde y el polinomio de la solución.
 
-    # Resolver el sistema de ecuaciones
-    coeficientes = np.linalg.solve(matrizA, matrizB)
+    Parámetros:
+    x (array): Valores de x
+    y (array): Valores de y
+    degree (int): Grado del polinomio
 
-    # Crear el polinomio resultante
-    polinomio_resultante = " + ".join([f"{coef:.2f} * {var}" for coef, var in zip(coeficientes, matrizC)])
+    Retorna:
+    vandermonde_matrix (array): Matriz de Vandermonde
+    polynomial (array): Coeficientes del polinomio
+    """
+    vandermonde_matrix = np.vander(x, degree + 1, increasing=True)
+    coefficients, _, _, _ = np.linalg.lstsq(vandermonde_matrix, y, rcond=None)
+    polynomial = np.poly1d(coefficients[::-1])
 
-    # Crear el objeto resultados
-    resultados = {
-        "matrizA": matrizA,
-        "matrizB": matrizB,
-        "matrizC": matrizC,
-        "polinomio_resultante": polinomio_resultante,
-        "coeficientes": coeficientes
-    }
+    # Construir representación en cadena de texto del polinomio
+    polynomial_str = str(polynomial)
 
-    return resultados
-  
-  #points = {"x": np.array([1, 2, 3]), "y": np.array([3, 5, 7])}
-  #resultados = Vandermonde(points)
-  #print(resultados)
+    resultado = pd.DataFrame({
+        'x': x,
+        'y': y,
+        'polinomio Vandermonde': [polynomial_str] * len(x)
+    })
+
+    # Verificar si la interpolación fue exitosa
+    if np.isfinite(polynomial).all():
+        mensaje = 'La interpolación de Vandermonde se realizó correctamente para los puntos dados.'
+    else:
+        mensaje = 'La interpolación de Vandermonde falló. Por favor, verifica los puntos de entrada.'
+
+    return resultado, mensaje
+
+
+def plot_polynomial(x, y, polynomial):
+    """
+    Grafica el polinomio.
+
+    Parámetros:
+    x (array): Valores de x
+    y (array): Valores de y
+    polynomial (array): Coeficientes del polinomio
+    """
+    x_plot = np.linspace(x.min(), x.max(), 400)
+    y_plot = polynomial(x_plot)
+    plt.plot(x, y, 'o', label='Datos')
+    plt.plot(x_plot, y_plot, label='Polinomio')
+    plt.legend()
+    plt.show()
+
+def save_to_file(vandermonde_matrix, polynomial, x, y):
+    """
+    Guarda la información en un archivo txt.
+
+    Parámetros:
+    vandermonde_matrix (array): Matriz de Vandermonde
+    polynomial (array): Coeficientes del polinomio
+    x (array): Valores de x
+    y (array): Valores de y
+    """
+    with open('vandermonde_output.txt', 'w') as f:
+        f.write('Matriz de Vandermonde:\n')
+        f.write(str(vandermonde_matrix) + '\n\n')
+        f.write('Polinomio de la solución:\n')
+        f.write(str(polynomial) + '\n\n')
+        f.write('Valores de x:\n')
+        f.write(str(x) + '\n\n')
+        f.write('Valores de y:\n')
+        f.write(str(y) + '\n\n')
 
 # Ejemplo de uso
-points = {"x": np.array([1, 2, 3]), "y": np.array([3, 5, 7])}
-resultados = Vandermonde(points)
-print("Matriz A:")
-print(resultados["matrizA"])
-print("Matriz B:")
-print(resultados["matrizB"])
-print("Matriz C:")
-print(resultados["matrizC"])
-print("Polinomio resultante:")
-print(resultados["polinomio_resultante"])
-print("Coeficientes:")
-print(resultados["coeficientes"])
+x = np.array([-1, 0, 1, 2, 3])
+y = np.array([1, 2, 3, 4, 5])
+degree = 3
+
+#vandermonde_matrix, polynomial = vandermonde(x, y, degree)
+#print("Matriz de Vandermonde:")
+#print(vandermonde_matrix)
+#print("Polinomio de la solución:")
+#print(polynomial)
+
+#plot_polynomial(x, y, polynomial)
+
+#save_to_file(vandermonde_matrix, polynomial, x, y)

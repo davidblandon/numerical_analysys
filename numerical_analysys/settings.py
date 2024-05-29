@@ -59,6 +59,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'chapter_1/templates'),
             os.path.join(BASE_DIR, 'chapter_2/templates'),
+            os.path.join(BASE_DIR, 'chapter_3/templates'),
             os.path.join(BASE_DIR, 'numerical_analysys/templates'),
         ],
         'APP_DIRS': True,

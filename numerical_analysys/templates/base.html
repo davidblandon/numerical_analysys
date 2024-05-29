@@ -4,7 +4,7 @@
     {% load static %} 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Título por defecto{% endblock title %}</title>
+    <title>{% block title %}Metodos Númericos{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -41,9 +41,12 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Capitulo 3<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Reducción 1</a></li>
-                    <li><a href="#">Reducción 2</a></li>
-                    <li><a href="#">Reducción 3</a></li>
+                    <li><a href="{% url 'lagrange' %}">Lagrange</a></li>
+                    <li><a href="{% url 'newton_interpolante' %}">Newton Interpolante</a></li>
+                    <li><a href="{% url 'vandermonde' %}">Vandermonde</a></li>
+                    <li><a href="{% url 'spline_lineal' %}">Spline Lineal</a></li>
+                    <li><a href="{% url 'spline_cubico' %}">Spline Cúbico</a></li>
+                    
                     <!-- Add more reductions here -->
                 </ul>
             </li>

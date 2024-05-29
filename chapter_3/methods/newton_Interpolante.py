@@ -1,38 +1,63 @@
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
-def method_newton_interpolante(points):
-    # Comprobamos si hay valores duplicados en las matrices
-    if len(np.unique(points['x'])) != len(points['x']) or len(np.unique(points['y'])) != len(points['y']):
-        raise ValueError("Las matrices x e y no pueden tener valores duplicados")
+def method_newton_interpolante(x, y):
+    n = len(x)
+    a = np.zeros((n, n))
+    a[:, 0] = y
+    
+    for i in range(1, n):
+        for j in range(i, n):
+            a[j, i] = (a[j, i-1] - a[j-1, i-1]) / (x[j] - x[j-i])
+    
+    polinomio = "P(x) = "
+    for i in range(n):
+        if i > 0:
+            polinomio += " + "
+        polinomio += f"{a[i, i]:.2f}"
+        for j in range(i):
+            polinomio += f"(x - {x[j]:.2f})"
+    
+    resultado = pd.DataFrame({
+        'x': x,
+        'y': y,
+        'polinomio Newton': [polinomio] * n
+    })
 
-    # Creamos la matriz 'datos' para contener los valores que se utilizarán para calcular los coeficientes del polinomio
-    n = len(points['x'])
-    datos = np.zeros((n, n))
-    datos[:, 0] = points['y']
+    # Verificar si la interpolación fue exitosa
+    if np.isfinite(a).all():
+        mensaje = 'La interpolación de Newton se realizó correctamente para los puntos dados.'
+    else:
+        mensaje = 'La interpolación de Newton falló. Por favor, verifica los puntos de entrada.'
 
-    # Calculamos los coeficientes del polinomio utilizando el método de diferencias divididas
-    for j in range(1, n):
-        for i in range(n - j):
-            datos[i, j] = (datos[i + 1, j - 1] - datos[i, j - 1]) / (points['x'][i + j] - points['x'][i])
+    return resultado, mensaje
+def graficar(x, y, polinomio):
+    x_interp = np.linspace(min(x), max(x), 100)
+    y_interp = np.interp(x_interp, x, y)
+    plt.plot(x, y, 'o', label='Datos')
+    plt.plot(x_interp, y_interp, label=polinomio)
+    plt.legend()
+    plt.show()
 
-    # Construimos la expresión del polinomio iterando sobre los coeficientes de la matriz 'datos'
-    expresion = ""
-    for j in range(n):
-        termino = datos[0, j]
-        for i in range(j):
-            termino *= (x - points['x'][i])
-        expresion += f" + {termino}"
+def guardar_archivo(x, y, polinomio):
+    with open("resultado.txt", "w") as f:
+        f.write("Datos:\n")
+        for i in range(len(x)):
+            f.write(f"({x[i]:.2f}, {y[i]:.2f})\n")
+        f.write("\nPolinomio:\n")
+        f.write(polinomio + "\n")
 
-    # Devolvemos un objeto llamado 'resultados' con los datos de la matriz 'datos' y la variable 'expresion'
-    resultados = {
-        'diferenciasDivididas': datos,
-        'expresion': expresion[3:]  # Eliminamos el primer signo '+' de la expresión
-    }
-    return resultados
-  
-#Ejemplo de uso
-points = {'x': np.array([1, 2, 3, 4]), 'y': np.array([1, 4, 9, 16])}
-resultados = NewtonInterpolante(points)
-print(resultados['expresion'])  # Output: 1 + 3*(x - 1) + 3*(x - 1)*(x - 2) + 1*(x - 1)*(x - 2)*(x - 3)
-print(resultados['diferenciasDivididas'])
-  
+def main():
+    x = input("Ingrese los valores de x separados por coma: ")
+    y = input("Ingrese los valores de y separados por coma: ")
+    x = np.array([float(i) for i in x.split(',')])
+    y = np.array([float(i) for i in y.split(',')])
+    
+    polinomio = newton_interpolante(x, y)
+    print(polinomio)
+    graficar(x, y, polinomio)
+    guardar_archivo(x, y, polinomio)
+
+if __name__ == "__main__":
+    main()

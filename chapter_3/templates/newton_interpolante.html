@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="method">
+    <h1>Método de Newton Interpolante</h1>
+    <form id="methodForm" method="post" action="{% url 'newton_interpolante' %}">
+
+        {% csrf_token %}
+        <label for="x">X:</label>
+        <input type="text" id="x" name="x" required><br>
+
+        <label for="y">Y:</label>
+        <input type="text" id="y" name="y" required><br>
+
+
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    {% if view_data.message %}
+    <form id="methodForm" method="post" action="{% url 'newton_interpolante' %}">
+        {% csrf_token %}
+        <div class="method">
+            <!-- Resto del formulario -->
+            <input type="hidden" name="message" value="{{ view_data.message }}">
+            <input type="hidden" name="answer" value="{{ view_data.answer_raw }}">
+        
+            <button type="submit" name="download">Descargar TXT</button>
+        </div>
+
+    </form>
+    <h2>{{ view_data.message }}</h2>
+
+    {{ view_data.answer|safe }}
+    {% endif %}
+</div>
+
+<script>
+function exportToTxt() {
+    // Lógica para exportar los resultados como TXT
+    alert('Función de exportación como TXT no implementada.');
+}
+
+function showResults() {
+    // Lógica para mostrar los resultados en pantalla
+    alert('Resultados mostrados en pantalla.');
+}
+</script>
+{% endblock content %}
