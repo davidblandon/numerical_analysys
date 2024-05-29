@@ -26,3 +26,14 @@ def method_gauss_seidel(A, b, x0, tol, niter):
 
 # Ejemplo de uso:
 
+A = np.array([[16, 3],
+              [7, -11]], dtype=float)
+
+b = np.array([11, 13], dtype=float)
+x0 = np.zeros(len(b))  # Condiciones iniciales
+tol = 1e-5  # Tolerancia
+niter = 100  # Número máximo de iteraciones
+
+#resultados, mensaje_final = method_gauss_seidel(A, b, x0, tol, niter)
+#print(mensaje_final)
+#print(resultados)

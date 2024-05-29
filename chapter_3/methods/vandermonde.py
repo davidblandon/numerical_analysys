@@ -1,6 +1,6 @@
 import numpy as np
 
-def Vandermonde(points):
+def method_vandermonde(points):
     # Crear matrices A, B y C
     matrizA = np.vander(points['x'], increasing=True)
     matrizB = np.matrix(points['y']).T

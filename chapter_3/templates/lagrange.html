@@ -2,30 +2,21 @@
 
 {% block content %}
 <div class="method">
-    <h1>Método de Bisección</h1>
-    <form id="methodForm" method="post" action="{% url 'biseccion' %}">
+    <h1>Método de Lagrange</h1>
+    <form id="methodForm" method="post" action="{% url 'lagrange' %}">
         {% csrf_token %}
-        <label for="funcion">Función:</label>
-        <input type="text" id="funcion" name="funcion" required><br>
+        <label for="x">X:</label>
+        <input type="text" id="x" name="a" required><br>
 
-        <label for="xi">Xi:</label>
-        <input type="text" id="xi" name="xi"  required><br>
+        <label for="y">Y:</label>
+        <input type="text" id="y" name="y" required><br>
 
-        <label for="xs">Xs:</label>
-        <input type="text" id="xs" name="xs"  required><br>
-
-        <label for="tol">Tolerancia:</label>
-        <input type="text" id="tol" name="tol"  required><br>
-
-        <label for="iter">Iteraciones:</label>
-        <input type="text" id="iter" name="iter" required><br>
 
         <button type="submit">Enviar</button>
-
     </form>
 
     {% if view_data.message %}
-    <form id="methodForm" method="post" action="{% url 'biseccion' %}">
+    <form id="methodForm" method="post" action="{% url 'gauss_seidel' %}">
         {% csrf_token %}
         <div class="method">
             <!-- Resto del formulario -->

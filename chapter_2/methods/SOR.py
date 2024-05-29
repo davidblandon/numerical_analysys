@@ -35,4 +35,15 @@ A = np.array([[4, -1, 0, 0],
               [0, -1, 4, -1],
               [0, 0, -1, 3]], dtype=float)
 
+b = np.array([15, 10, 10, 10], dtype=float)
+x0 = np.zeros(len(b))  # Condiciones iniciales
+tol = 1e-5  # Tolerancia
+niter = 100  # Número máximo de iteraciones
+w = 1.25  # Factor de relajación
+
+#resultados, mensaje_final = SOR(A, b, x0, tol, niter, w)
+#print(mensaje_final)
+#print(resultados)
+
+
 

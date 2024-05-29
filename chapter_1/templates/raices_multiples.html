@@ -22,31 +22,23 @@
 
         <button type="submit">Enviar</button>
     </form>
+    {% if view_data.message %}
+    <form id="methodForm" method="post" action="{% url 'punto_fijo' %}">
+        {% csrf_token %}
+        <div class="method">
+            <!-- Resto del formulario -->
+            <input type="hidden" name="message" value="{{ view_data.message }}">
+            <input type="hidden" name="answer" value="{{ view_data.answer_raw }}">
+        
+            <button type="submit" name="download">Descargar TXT</button>
+        </div>
 
-    {% if answer %}
-    <h2>Resultados</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Encabezado 1</th>
-                <th>Encabezado 2</th>
-                <th>Encabezado 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
-            <tr>
-                <td>{{ result.field1 }}</td>
-                <td>{{ result.field2 }}</td>
-                <td>{{ result.field3 }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    </form>
+    <h2>{{ view_data.message }}</h2>
 
-    <button onclick="exportToTxt()">Exportar como TXT</button>
-    <button onclick="showResults()">Mostrar Resultados</button>
+    {{ view_data.answer|safe }}
     {% endif %}
+
 </div>
 
 <script>

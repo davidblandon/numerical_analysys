@@ -33,4 +33,13 @@ A = np.array([[10, -1, 2, 0],
               [2, -1, 10, -1],
               [0, 3, -1, 8]], dtype=float)
 
+b = np.array([6, 25, -11, 15], dtype=float)
+x0 = np.zeros(len(b))  # Condiciones iniciales
+tol = 1e-5  # Tolerancia
+niter = 100  # Número máximo de iteraciones
+
+#resultados, mensaje_final = jacobi(A, b, x0, tol, niter)
+#print(mensaje_final)
+#print(resultados)
+
 

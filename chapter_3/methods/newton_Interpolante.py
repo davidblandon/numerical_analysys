@@ -1,6 +1,6 @@
 import numpy as np
 
-def NewtonInterpolante(points):
+def method_newton_interpolante(points):
     # Comprobamos si hay valores duplicados en las matrices
     if len(np.unique(points['x'])) != len(points['x']) or len(np.unique(points['y'])) != len(points['y']):
         raise ValueError("Las matrices x e y no pueden tener valores duplicados")

@@ -22,19 +22,19 @@
         <button type="submit">Enviar</button>
     </form>
 
-    {% if view_data.messaje %}
+    {% if view_data.message %}
     <form id="methodForm" method="post" action="{% url 'newton' %}">
         {% csrf_token %}
         <div class="method">
             <!-- Resto del formulario -->
-            <input type="hidden" name="messaje" value="{{ view_data.messaje }}">
+            <input type="hidden" name="message" value="{{ view_data.message }}">
             <input type="hidden" name="answer" value="{{ view_data.answer_raw }}">
         
             <button type="submit" name="download">Descargar TXT</button>
         </div>
 
     </form>
-    <h2>{{ view_data.messaje }}</h2>
+    <h2>{{ view_data.message }}</h2>
 
     {{ view_data.answer|safe }}
     {% endif %}

@@ -1,8 +1,6 @@
 import numpy as np
 
-def Lagrange(points):
-    x = points['x']
-    y = points['y']
+def method_lagrange(x,y):
     n = len(x)
     polinomios = []
 
@@ -33,5 +31,5 @@ points = {
     'y': np.array([1, 3, 2])
 }
 
-resultado = Lagrange(points)
-print(resultado)
+#resultado = Lagrange(points)
+#print(resultado)
