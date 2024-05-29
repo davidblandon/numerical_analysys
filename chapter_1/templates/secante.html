@@ -23,8 +23,16 @@
         <button type="submit">Enviar</button>
     </form>
 
+    {% load static %} 
+    {% if image_path %}
+    <div>
+        <h3>Resultado de la Gráfica:</h3>
+        <img src="{% static 'images/graph.png' %}" alt="Gráfica Resultante">
+    </div>
+    {% endif %}
+
     {% if view_data.message %}
-    <form id="methodForm" method="post" action="{% url 'punto_fijo' %}">
+    <form id="methodForm" method="post" action="{% url 'secante' %}">
         {% csrf_token %}
         <div class="method">
             <!-- Resto del formulario -->
@@ -35,6 +43,20 @@
         </div>
 
     </form>
+
+    <form id="methodForm" method="post" action="{% url 'secante' %}">
+        {% csrf_token %}
+        <div class="method">
+            <!-- Resto del formulario -->
+            <input type="hidden" name="message" value="{{ view_data.message }}">
+            <input type="hidden" name="x0" value="{{ view_data.x0 }}">
+            <input type="hidden" name="x1" value="{{ view_data.x1 }}">
+            <input type="hidden" name="funcion" value="{{ view_data.funcion }}">
+            <button type="submit" name="graph">Gráficar solución</button>
+        </div>
+    </form>
+
+
     <h2>{{ view_data.message }}</h2>
 
     {{ view_data.answer|safe }}
