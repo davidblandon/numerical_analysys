@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from .methods.Lagrange import method_lagrange
-from .methods.newton_interpolante import method_newton_interpolante
+from .methods.newton_Interpolante import method_newton_interpolante
 from numerical_analysys.export.toTxt import create_txt_download
 from .methods.vandermonde import method_vandermonde
-from .methods.spline_lineal import method_spline_lineal
-from .methods.spline_cubico import method_spline_cubico
+from .methods.Spline_lineal import method_spline_lineal
+from .methods.Spline_cubico import method_spline_cubico
 import numpy as np
 import ast
 
